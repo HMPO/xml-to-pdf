@@ -1,0 +1,44 @@
+{
+  "name": "xml-to-pdf",
+  "version": "1.0.2",
+  "description": "PDF generation from XML to a stream, buffer, or file",
+  "main": "lib/generate.js",
+  "scripts": {
+    "test": "run-s test:lint test:unit test:cover test:cover-check",
+    "test:lint": "eslint .",
+    "test:unit": "mocha test/unit --recursive --require test/unit/helper",
+    "test:cover": "istanbul cover _mocha -- -R dot test/unit --recursive --require test/unit/helper",
+    "test:cover-check": "istanbul check-coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HughePaul/xml-to-pdf.git"
+  },
+  "author": "Paul Winkler",
+  "license": "MIT",
+  "engines": {
+    "node": ">=4"
+  },
+  "bugs": {
+    "url": "https://github.com/HughePaul/xml-to-pdf/issues"
+  },
+  "homepage": "https://github.com/HughePaul/xml-to-pdf",
+  "dependencies": {
+    "concat-stream": "^2.0.0",
+    "debug": "^4.1.1",
+    "deep-clone-merge": "^1.4.0",
+    "hogan.js": "^3.0.2",
+    "pdfkit": "^0.9.0",
+    "underscore": "^1.8.2",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.12.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.0.2",
+    "sinon": "^7.2.3",
+    "sinon-chai": "^3.3.0"
+  }
+}

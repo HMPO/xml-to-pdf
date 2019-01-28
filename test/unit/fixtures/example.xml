@@ -1,0 +1,68 @@
+<pdf>
+    <head>
+        <filename>filename.pdf</filename>
+        <document size="A4"/>
+        <title>Document title</title>
+        <meta>
+            <author>Anne Author</author>
+        </meta>
+        <styles>
+            <hlabel extends="p" marginBottom="-6"/>
+            <a underline="true" color="black"/>
+            <addressline extends="p" lineGap="0"/>
+            <important extends="img" src="important.png" width="17" height="17" fit="true"/>
+            <h4 extends="h3" size="15" marginTop="12" marginBottom="6"/>
+            <h5 extends="p" size="12" font="bold" marginTop="7" marginBottom="0"/>
+        </styles>
+    </head>
+    <page>
+        <img src="logo.png" scale="30%" right="42" top="42"/>
+        <h1 top="42" width="200">A big title</h1>
+
+        <div top="120">
+            <row>
+                <column width="66%">
+                    <hlabel>Name</hlabel>
+                    <h3>Foo Bar</h3>
+                </column>
+
+                <column width="33%">
+                    <hlabel>Date</hlabel>
+                    <h3>1st January 1970</h3>
+                </column>
+            </row>
+
+            <hr thickness="1" marginTop="-5"/>
+
+            <row marginLeft="2" marginTop="5" marginBottom="8">
+                <column width="20">
+                    <important/>
+                </column>
+                <column width="80%" margin="4">
+                    <strong>Warning!</strong>
+                </column>
+            </row>
+
+            <h3>Indented section</h3>
+            <indent marginBottom="8" marginTop="2" paddingBottom="-6">
+                <p>Some text</p>
+                <p>a <a>link</a></p>
+            </indent>
+        </div>
+
+        <div top="745" height="50" marginLeft="-7" marginRight="-7" backgroundColor="grey"/>
+
+        <row top="750">
+            <column width="66%">
+                <h2>Footer</h2>
+            </column>
+            <column width="33%">
+                <h2>Section</h2>
+            </column>
+        </row>
+
+    </page>
+    <page>
+      <h1>Page 2</h1>
+    </page>
+</pdf>
