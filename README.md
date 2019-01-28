@@ -5,9 +5,9 @@ PDF generation using an XML source. Can generate a file, buffer or stream.
 ```
 const pdf = require('express-hogan-pdf');
 
-pdf.toStream(xml, locals, (err, stream) => {});
-pdf.toBuffer(xml, locals, (err, buffer) => {});
-pdf.toFile(xml, locals, destFile, (err) => {});
+pdf.toStream(xml, basePath, (err, stream) => {});
+pdf.toBuffer(xml, basePath, (err, buffer) => {});
+pdf.toFile(xml, basePath, destFile, (err) => {});
 
 ```
 
@@ -15,7 +15,7 @@ pdf.toFile(xml, locals, destFile, (err) => {});
 ```
 app.get('/path', (req, res, next) => {
     let xml = '<pdf>xmldata</pdf>';
-    pdf.toStream(xml, (err, stream) => {
+    pdf.toStream(xml, '/base/path/for/images', (err, stream) => {
         if (err) return next(err);
         res.attachment(stream.filename);
         stream.pipe(res);

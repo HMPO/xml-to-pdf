@@ -8,18 +8,12 @@ const PDF = require('../../../lib/pdf');
 const ConcatStream = new require('concat-stream');
 
 describe('generate', () => {
-    let stubs, xml, locals, callback, basePath;
+    let stubs, xml, callback, basePath;
 
     beforeEach(() => {
         stubs = {};
         xml = '<pdf></pdf>';
         basePath = '/path';
-        locals = {
-            foo: 'bar',
-            partials: {
-                'partial': 'partial/path'
-            }
-        };
         callback = sinon.stub();
     });
 
@@ -37,19 +31,19 @@ describe('generate', () => {
             PDF.prototype.render.restore();
         });
 
-        it('should be a function with 4 arguments', () => {
-            generate.toStream.should.be.a('function').and.have.lengthOf(4);
+        it('should be a function with 3 arguments', () => {
+            generate.toStream.should.be.a('function').and.have.lengthOf(3);
         });
 
         it('should callback with render error', () => {
             let err = new Error();
             unmarshal.xmlToObject.yields(err);
-            generate.toStream(xml, basePath, locals, callback);
+            generate.toStream(xml, basePath, callback);
             callback.should.have.been.calledWithExactly(err);
         });
 
         it('should render a PDF from the unmarshalled data', () => {
-            generate.toStream(xml, basePath, locals, callback);
+            generate.toStream(xml, basePath, callback);
             PDF.prototype.render.should.have.been.calledWithExactly();
             callback.should.have.been.calledWithExactly(null, stubs.doc);
         });
@@ -57,7 +51,7 @@ describe('generate', () => {
         it('should callback a PDF rendering error', () => {
             let err = new Error();
             PDF.prototype.render.throws(err);
-            generate.toStream(xml, basePath, locals, callback);
+            generate.toStream(xml, basePath, callback);
             callback.should.have.been.calledWithExactly(err);
         });
     });
@@ -74,24 +68,24 @@ describe('generate', () => {
             generate.toStream.restore();
         });
 
-        it('should be a function with 4 arguments', () => {
-            generate.toBuffer.should.be.a('function').and.have.lengthOf(4);
+        it('should be a function with 3 arguments', () => {
+            generate.toBuffer.should.be.a('function').and.have.lengthOf(3);
         });
 
         it('should call toStream', () => {
-            generate.toBuffer(xml, basePath, locals, callback);
-            generate.toStream.should.have.been.calledWithExactly(xml, basePath, locals, sinon.match.func);
+            generate.toBuffer(xml, basePath, callback);
+            generate.toStream.should.have.been.calledWithExactly(xml, basePath, sinon.match.func);
         });
 
         it('should callback with error from toStream', () => {
             let err = new Error();
             generate.toStream.yields(err);
-            generate.toBuffer(xml, basePath, locals, callback);
+            generate.toBuffer(xml, basePath, callback);
             callback.should.have.been.calledWithExactly(err);
         });
 
         it('should pipe the document to contact to provide a buffer', done => {
-            generate.toBuffer(xml, basePath, locals, callback);
+            generate.toBuffer(xml, basePath, callback);
             stubs.doc.pipe.should.have.been.calledWithExactly(sinon.match.instanceOf(ConcatStream));
             let concat = stubs.doc.pipe.getCall(0).args[0];
             concat.write([1, 2, 3]);
@@ -105,7 +99,7 @@ describe('generate', () => {
 
         it('should copy the filename from the stream', done => {
             stubs.doc.filename = 'filename';
-            generate.toBuffer(xml, basePath, locals, callback);
+            generate.toBuffer(xml, basePath, callback);
             let concat = stubs.doc.pipe.getCall(0).args[0];
             concat.write([1, 2, 3]);
             concat.end();
@@ -139,36 +133,36 @@ describe('generate', () => {
             fs.createWriteStream.restore();
         });
 
-        it('should be a function with 5 arguments', () => {
-            generate.toFile.should.be.a('function').and.have.lengthOf(5);
+        it('should be a function with 4 arguments', () => {
+            generate.toFile.should.be.a('function').and.have.lengthOf(4);
         });
 
         it('should call toStream', () => {
-            generate.toFile(xml, basePath, locals, destFileName, callback);
-            generate.toStream.should.have.been.calledWithExactly(xml, basePath, locals, sinon.match.func);
+            generate.toFile(xml, basePath, destFileName, callback);
+            generate.toStream.should.have.been.calledWithExactly(xml, basePath, sinon.match.func);
         });
 
         it('should callback with error from toStream', () => {
             let err = new Error();
             generate.toStream.yields(err);
-            generate.toFile(xml, basePath, locals, destFileName, callback);
+            generate.toFile(xml, basePath, destFileName, callback);
             callback.should.have.been.calledWithExactly(err);
         });
 
         it('should create a file stream with the dest filename', () => {
-            generate.toFile(xml, basePath, locals, destFileName, callback);
+            generate.toFile(xml, basePath, destFileName, callback);
             fs.createWriteStream.should.have.been.calledWithExactly(destFileName);
         });
 
         it('should pipe the document to contact to file stream', () => {
-            generate.toFile(xml, basePath, locals, destFileName, callback);
+            generate.toFile(xml, basePath, destFileName, callback);
             stubs.doc.pipe.should.have.been.calledWithExactly(stubs.stream);
             callback.should.not.have.been.called;
         });
 
         it('should call the callback when the pipe is complete', () => {
             stubs.stream.on.withArgs('finish').yields(null);
-            generate.toFile(xml, basePath, locals, destFileName, callback);
+            generate.toFile(xml, basePath, destFileName, callback);
             callback.should.have.been.calledWithExactly(null);
         });
 
@@ -178,7 +172,7 @@ describe('generate', () => {
         let sourcefilename = path.resolve(__dirname, '..', 'fixtures', 'example.xml');
         let examplepdf = path.resolve(__dirname, '..', 'fixtures', 'example.pdf');
         let xml = fs.readFileSync(sourcefilename);
-        generate.toBuffer(xml, path.dirname(sourcefilename), {}, (err, buffer) => {
+        generate.toBuffer(xml, path.dirname(sourcefilename), (err, buffer) => {
             expect(err).to.be.null;
             // fs.writeFileSync(examplepdf, buffer);
             let pdf = fs.readFileSync(examplepdf);
