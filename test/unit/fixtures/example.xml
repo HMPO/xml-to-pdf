@@ -46,7 +46,7 @@
             <h3>Indented section</h3>
             <indent marginBottom="8" marginTop="2" paddingBottom="-6">
                 <p>Some text</p>
-                <p>a <a>link</a></p>
+                <p>a <a href="link">link</a></p>
             </indent>
         </div>
 
