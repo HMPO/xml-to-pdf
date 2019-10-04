@@ -47,7 +47,7 @@
             <indent marginBottom="8" marginTop="2" paddingBottom="-6">
                 <p>Some text</p>
                 <p>a link with url: <a>example.com</a></p>
-                <p>a <a href="http://www.example.com">link with <span font="bold">href</span></a></p>
+                <p>a <a href="http://www.example.com">link with <span font="bold">href</span></a> and after text</p>
             </indent>
         </div>
 
