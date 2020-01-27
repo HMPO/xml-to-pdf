@@ -174,7 +174,7 @@ describe('generate', () => {
         let xml = fs.readFileSync(sourcefilename);
         generate.toBuffer(xml, path.dirname(sourcefilename), (err, buffer) => {
             expect(err).to.be.null;
-            fs.writeFileSync(examplepdf, buffer);
+            // fs.writeFileSync(examplepdf, buffer);
             let pdf = fs.readFileSync(examplepdf);
             buffer.byteLength.should.equal(pdf.byteLength);
             done();
