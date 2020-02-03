@@ -4,11 +4,11 @@
   "description": "PDF generation from XML to a stream, buffer, or file",
   "main": "lib/generate.js",
   "scripts": {
-    "test": "run-s test:lint test:unit test:cover test:cover-check",
+    "test": "run-s test:lint test:unit test:cover test:cover-check && npm audit",
     "test:lint": "eslint .",
     "test:unit": "mocha test/unit --recursive --require test/unit/helper",
-    "test:cover": "istanbul cover _mocha -- -R dot test/unit --recursive --require test/unit/helper",
-    "test:cover-check": "istanbul check-coverage"
+    "test:cover": "nyc --reporter=lcov --reporter=text-summary _mocha -- -R dot test/unit --recursive --require test/unit/helper",
+    "test:cover-check": "nyc check-coverage"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
   "author": "Paul Winkler",
   "license": "MIT",
   "engines": {
-    "node": ">=4"
+    "node": ">=8"
   },
   "bugs": {
     "url": "https://github.com/HughePaul/xml-to-pdf/issues"
@@ -26,7 +26,7 @@
   "dependencies": {
     "concat-stream": "^2.0.0",
     "debug": "^4.1.1",
-    "deep-clone-merge": "^1.4.0",
+    "deep-clone-merge": "^1.5.0",
     "hogan.js": "^3.0.2",
     "pdfkit": "^0.11.0",
     "underscore": "^1.9.2",
@@ -35,10 +35,21 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
-    "istanbul": "^0.4.3",
     "mocha": "^7.0.1",
     "npm-run-all": "^4.0.2",
+    "nyc": "^15.0.0",
     "sinon": "^8.1.1",
     "sinon-chai": "^3.4.0"
-  }
-}
+  },
+  "nyc": {
+    "all": true,
+    "exclude": [
+      "coverage/**",
+      "bin/**",
+      "test/**"
+    ],
+    "statements": 92,
+    "branches": 84,
+    "functions": 98,
+    "lines": 95
+  }}
