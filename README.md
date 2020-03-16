@@ -29,7 +29,7 @@ app.get('/path', (req, res, next) => {
 <pdf>
   <config>
     <filename>my-file.pdf</filename>
-    <document size="A4" marginBottom="50">
+    <document size="A4" marginBottom="50"/>
     <title>{{title}}</title>
     <colors darkred="#800"/>
     <styles>
