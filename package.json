@@ -4,7 +4,7 @@
   "description": "PDF generation from XML to a stream, buffer, or file",
   "main": "lib/generate.js",
   "scripts": {
-    "test": "run-s test:lint test:unit test:cover test:cover-check && npm audit",
+    "test": "run-s test:lint test:unit test:cover test:cover-check && npm audit --production",
     "test:lint": "eslint .",
     "test:unit": "mocha test/unit --recursive --require test/unit/helper",
     "test:cover": "nyc --reporter=lcov --reporter=text-summary _mocha -- -R dot test/unit --recursive --require test/unit/helper",
@@ -35,7 +35,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
-    "mocha": "^7.1.0",
+    "mocha": "^7.1.1",
     "npm-run-all": "^4.0.2",
     "nyc": "^15.0.0",
     "sinon": "^9.0.1",
