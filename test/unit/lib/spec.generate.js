@@ -170,7 +170,8 @@ describe('generate', () => {
 
     it('example pdf render', done => {
         let sourcefilename = path.resolve(__dirname, '..', 'fixtures', 'example.xml');
-        let examplepdf = path.resolve(__dirname, '..', 'fixtures', 'example.pdf');
+        let nodeVersion = process.versions.node.split('.')[0];
+        let examplepdf = path.resolve(__dirname, '..', 'fixtures', 'example-node' + nodeVersion + '.pdf');
         let xml = fs.readFileSync(sourcefilename);
         generate.toBuffer(xml, path.dirname(sourcefilename), (err, buffer) => {
             expect(err).to.be.null;
