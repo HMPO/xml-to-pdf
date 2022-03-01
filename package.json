@@ -25,20 +25,20 @@
   "homepage": "https://github.com/HughePaul/xml-to-pdf",
   "dependencies": {
     "concat-stream": "^2.0.0",
-    "debug": "^4.3.2",
-    "deep-clone-merge": "^1.5.2",
+    "debug": "^4.3.3",
+    "deep-clone-merge": "^1.5.4",
     "hogan.js": "^3.0.2",
     "pdfkit": "^0.12.3",
-    "underscore": "^1.13.1",
+    "underscore": "^1.13.2",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
-    "eslint": "^7.32.0",
-    "mocha": "^9.1.2",
+    "chai": "^4.3.6",
+    "eslint": "^8.10.0",
+    "mocha": "^9.2.1",
     "npm-run-all": "^4.0.2",
     "nyc": "^15.1.0",
-    "sinon": "^11.1.2",
+    "sinon": "^13.0.1",
     "sinon-chai": "^3.7.0"
   },
   "nyc": {
