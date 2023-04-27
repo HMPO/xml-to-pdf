@@ -1,6 +1,6 @@
 {
   "name": "xml-to-pdf",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "PDF generation from XML to a stream, buffer, or file",
   "main": "lib/generate.js",
   "scripts": {
