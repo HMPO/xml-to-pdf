@@ -47,8 +47,8 @@ describe('unmarshal', () => {
 
             result['#name'].should.equal('pdf');
             result.children.should.be.an('array');
-            result.children[0].options.should.deep.equal(result.tag[0].options);
-            result.tag[0].options.should.deep.equal({
+            expect(result.children[0].options).to.deep.equal(result.tag[0].options);
+            expect(result.tag[0].options).to.deep.equal({
                 attrib: 'value',
                 numberattrib: 123,
                 booleanattrib: true
@@ -59,8 +59,8 @@ describe('unmarshal', () => {
                 '#name': '__text__',
                 textContent: 'This is text'
             });
-            result.should.contain.keys('mixedcasetag');
-            result.mixedcasetag[0].options.should.contain.keys('MixedCaseAttrib');
+            expect(result).to.contain.keys('mixedcasetag');
+            expect(result.mixedcasetag[0].options).to.contain.keys('MixedCaseAttrib');
         });
 
     });
