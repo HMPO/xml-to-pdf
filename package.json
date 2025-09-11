@@ -25,7 +25,7 @@
   "homepage": "https://github.com/HMPO/xml-to-pdf",
   "dependencies": {
     "concat-stream": "^2.0.0",
-    "debug": "4.3.4",
+    "debug": "^4.3.4",
     "deep-clone-merge": "^1.5.5",
     "pdfkit": "^0.16.0",
     "underscore": "^1.13.6",
